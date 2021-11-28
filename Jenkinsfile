@@ -1,6 +1,6 @@
 @Library('roboshop') _
 
-nodejs(
+python(
   COMPONENT : 'payment',
   LABEL     : 'WORKSTATION'
 )
