@@ -5,7 +5,12 @@
 //    LABEL                     : 'WORKSTATION'
 //)
 
-pythonImmutable(
+//pythonImmutable(
+//    COMPONENT                 : 'payment',
+//    LABEL                     : 'WORKSTATION'
+//)
+
+docker(
     COMPONENT                 : 'payment',
     LABEL                     : 'WORKSTATION'
 )
