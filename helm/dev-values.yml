@@ -1,12 +1,12 @@
+appName: payment
 replicaCount: 1
 image:
-  repository: 378784712135.dkr.ecr.us-east-1.amazonaws.com/cart
-  pullPolicy: IfNotPresent
+  repository: 378784712135.dkr.ecr.us-east-1.amazonaws.com/payment
+  pullPolicy: Always
 
 serviceAccount:
   create: true
   annotations: {}
-  name: "cart"
 
 service:
   type: ClusterIP
@@ -14,9 +14,28 @@ service:
   containerPort: 8080
 
 resources:
-   limits:
-     cpu: 100m
-     memory: 256Mi
-   requests:
-     cpu: 100m
-     memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+env:
+  name: dev
+
+configmap:
+  create: true
+  content:
+    CART_HOST: cart
+    CART_PORT: "80"
+    USER_HOST: user
+    USER_PORT: "80"
+    AMQP_HOST: rabbitmq
+    AMQP_USER: roboshop
+    AMQP_PASS: roboshop123
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
